@@ -1,18 +1,43 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 describe('AuthController', () => {
-  let controller: AuthController;
+  let authController: AuthController;
+
+  const mockAuthService = {
+    signIn: jest.fn()
+  }
+  const mockAuthGuard = {}
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const authModule: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
-    }).compile();
+      providers: [AuthService],
+      exports: [AuthService],
+    })
+    .overrideProvider(AuthService)
+    .useValue(mockAuthService)
+    .overrideGuard(AuthGuard)
+    .useValue(mockAuthGuard)
+    .compile();
 
-    controller = module.get<AuthController>(AuthController);
+    authController = authModule.get<AuthController>(AuthController);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(authController).toBeDefined();
+  });
+
+  it('should let user sign-in/login', () => {
+    let signinDto = {
+      email: "",
+      password: ""
+    }
+    mockAuthService.signIn.mockImplementationOnce(() => {
+      return { access_token: "12fd6g541e516gf8d" }
+    })
+    expect(authController.signIn(signinDto)).toEqual({ access_token: "12fd6g541e516gf8d" });
   });
 });

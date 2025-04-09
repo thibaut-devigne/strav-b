@@ -8,7 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { Request } from 'express';
 
-type DecodedToken = {
+export type DecodedToken = {
   username: string;
   iat: number;
   exp: number;

@@ -1,0 +1,25 @@
+meta {
+  name: GET USERS
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/users
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "username": "harry_P",
+     "firstname": "Harry",
+     "lastname": "Potter",
+     "email": "harry.potter@poudlard.com",
+     "password": "TomJedusor25"
+  }
+}
