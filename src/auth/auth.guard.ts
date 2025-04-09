@@ -9,10 +9,10 @@ import { jwtConstants } from './constants';
 import { Request } from 'express';
 
 export type DecodedToken = {
-  username: string;
+  email: string;
+  userId: number;
   iat: number;
   exp: number;
-  id: number;
 };
 
 @Injectable()

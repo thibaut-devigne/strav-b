@@ -1,0 +1,25 @@
+meta {
+  name: ADD
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/activity
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+      "type": "training",
+      "startTime": "2025-04-01T15:16:17.123Z",
+      "duration": 2400,
+      "distance": 5000,
+      "name": "Sortie de reprise"
+  }
+}

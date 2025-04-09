@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ActivityModule } from './activity/activity.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -16,8 +18,9 @@ import { AuthModule } from './auth/auth.module';
       autoLoadEntities: true,
       synchronize: true, // À désactiver en production
     }),
-    AuthModule, 
-    UsersModule, 
+    AuthModule,
+    UsersModule,
+    ActivityModule
   ],
   controllers: [AppController],
   providers: [AppService],

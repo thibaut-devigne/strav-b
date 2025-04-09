@@ -1,3 +1,4 @@
+import { Activity } from '../../activity/entities/activity.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity("users")
@@ -19,4 +20,7 @@ export class User {
 
   @Column({ type: 'text' })
   password: string;
+
+  @OneToMany(() => Activity, (session) => session.user)
+  runningSessions: Activity[];
 }
